@@ -1,0 +1,599 @@
+html {
+    color-scheme: dark light;
+}
+
+:root {
+    /* Primary colors */
+    --soft-red: hsl(7, 99%, 70%);
+    --yellow: hsl(51, 100%, 49%);
+    --desaturated-cyan: hsl(167, 40%, 24%); /*graphic design text*/
+    --mid-cyan: hsl(168, 34%, 41%); /*footer*/
+    --dark-blue: hsl(198, 62%, 26%); /*photography text*/
+
+    /* Neutral colors */
+    --desaturated-blue: hsl(212, 27%, 19%);
+    --very-dark-grayish-blue: hsl(213, 9%, 39%);
+    --dark-grayish-blue: hsl(232, 10%, 55%);
+    --grayish-blue: hsl(210, 4%, 67%);
+    --white: hsl(0, 0%, 100%);
+}
+
+/* Thanks https://piccalil.li/blog/a-modern-css-reset/ */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+html:focus-within {
+    scroll-behavior: smooth;
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Utility classes */
+.flex {
+    display: flex;
+}
+
+.grid {
+    display: grid;
+}
+
+.bg-white {
+    background-color: var(--white);
+}
+
+/* Sets the body default */
+body {
+    min-height: 100vh;
+    text-rendering: optimizeSpeed;
+    /* line-height: 1.5; */
+    /* background: linear-gradient(
+        #3ebfff,
+        #3dbefe,
+        var(--white),
+        var(--mid-cyan)
+    ); */
+}
+
+.container {
+    max-width: clamp(320px, 100vw, 425px);
+    margin-inline: auto;
+    padding: 1em 2em;
+    position: relative;
+}
+
+/* Layout */
+.header .container {
+    height: 70vh;
+    background-image: url('./images/mobile/image-header.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    padding: 0;
+}
+
+/* Navigation */
+.nav-wrapper {
+    padding: 1em 0;
+}
+
+.footer a,
+.nav-wrapper a {
+    text-decoration: none;
+}
+
+.footer-links,
+.nav-wrapper ul {
+    list-style: none;
+    padding: 0;
+}
+
+.logo {
+    display: inline-block;
+}
+
+.nav {
+    width: 100%;
+    position: absolute;
+    margin-top: 0.5em;
+    overflow: hidden;
+    display: block;
+
+    max-height: 0;
+    transition: max-height 0.25s ease-in-out;
+}
+
+.nav .btn {
+    background-color: var(--yellow);
+    display: inline-block;
+    padding: 0.75em 1em;
+    margin-top: 1em;
+    border-radius: 30px;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--desaturated-blue);
+}
+
+.menu {
+    text-align: center;
+    margin: 1em 0 2em;
+}
+
+.menu a {
+    display: block;
+    padding: 1em 0;
+    color: var(--dark-blue);
+}
+
+.hamb {
+    cursor: pointer;
+}
+
+.hamb-line {
+    float: right;
+    display: block;
+    height: 3px;
+    width: 24px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.hamb-line::before,
+.hamb-line::after {
+    content: '';
+    background-color: var(--white);
+    display: block;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all 0.2s ease-out;
+}
+
+.hamb-line::before {
+    top: 7px;
+}
+
+.hamb-line::after {
+    top: -7px;
+}
+
+.side-menu {
+    display: none;
+}
+
+.side-menu:checked ~ nav {
+    max-height: 100%;
+}
+
+.side-menu:checked ~ .hamb .hamb-line {
+    background: transparent;
+}
+
+.side-menu:checked ~ .hamb .hamb-line::before {
+    transform: rotate(-45deg);
+    top: 0;
+}
+
+.side-menu:checked ~ .hamb .hamb-line::after {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+/* Hero */
+.hero {
+    line-height: 1.2;
+    place-items: center;
+    gap: 2em;
+}
+
+.hero-title {
+    font-size: 3rem;
+    text-transform: uppercase;
+    text-align: center;
+    padding-top: 0.5em;
+}
+
+/* Features */
+.features .container {
+    color: var(--desaturated-blue);
+    text-align: center;
+    padding: 0;
+}
+
+.feature-img {
+    aspect-ratio: 1 / 1;
+    background-position: 50%;
+    background-size: cover;
+}
+
+.transform {
+    order: -1;
+    background-image: url('./images/mobile/image-transform.jpg');
+}
+
+.stand-out {
+    order: -1;
+    background-image: url('./images/mobile/image-stand-out.jpg');
+}
+
+.feature-text {
+    padding: 2.5em 1em;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+
+.grid-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5em;
+}
+
+.grid-desc {
+    margin-bottom: 0.5em;
+    color: var(--grayish-blue);
+}
+
+.more {
+    font-size: 16px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: inherit;
+}
+
+.more:hover {
+    text-decoration-thickness: 5px;
+}
+
+.yellow {
+    text-decoration-color: var(--yellow);
+}
+
+.red {
+    text-decoration-color: var(--soft-red);
+}
+
+.graphic,
+.photography {
+    padding: 0 1em 2.5em;
+    height: 500px;
+    background-size: cover;
+    flex-direction: column;
+    justify-content: end;
+    flex-wrap: wrap;
+}
+
+.graphic {
+    background-image: url('./images/mobile/image-graphic-design.jpg');
+}
+
+.graphic > * {
+    color: var(--desaturated-cyan);
+}
+
+.photography {
+    background-image: url('./images/mobile/image-photography.jpg');
+}
+
+.photography > * {
+    color: var(--dark-blue);
+}
+
+/* Client testimonials */
+.testimonials .container {
+    text-align: center;
+    color: var(--very-dark-grayish-blue);
+}
+
+.testimonials h2 {
+    color: var(--grayish-blue);
+    text-transform: uppercase;
+    padding-block: 2em;
+    font-size: 1rem;
+    letter-spacing: 2px;
+}
+
+.client-wrapper > * {
+    padding-block: 1em;
+}
+
+.profile-img {
+    border-radius: 50%;
+    width: 50px;
+    margin: 0 auto;
+}
+
+.occupation {
+    padding-top: 0;
+    color: var(--grayish-blue);
+}
+
+.name {
+    padding-bottom: 0.5em;
+    color: var(--desaturated-blue);
+}
+
+/* Image Gallery */
+.gallery .container {
+    min-height: 300px;
+    aspect-ratio: 1 / 1;
+    padding: 0;
+
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.milk,
+.orange,
+.cone,
+.cubes {
+    background-size: cover;
+    background-position: 50%;
+}
+
+.milk {
+    background-image: url('./images/mobile/image-gallery-milkbottles.jpg');
+}
+.orange {
+    background-image: url('./images/mobile/image-gallery-orange.jpg');
+}
+.cone {
+    background-image: url('./images/mobile/image-gallery-cone.jpg');
+}
+.cubes {
+    background-image: url('./images/mobile/image-gallery-sugar-cubes.jpg');
+}
+
+/* Footer */
+.footer .container {
+    background-color: var(--mid-cyan);
+    text-align: center;
+}
+
+.footer .logo {
+    padding-block: 1em;
+    scale: 1.5;
+}
+
+.footer-links {
+    gap: 3em;
+    justify-content: center;
+    padding-block: 1em;
+}
+
+.footer-links a {
+    color: var(--desaturated-cyan);
+    transition: color 0.2s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+.socials {
+    justify-content: center;
+    padding-block: 3em;
+    gap: 1em;
+}
+
+/* Attribution */
+.attribution {
+    font-size: 11px;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0.5em;
+    background-color: var(--yellow);
+}
+
+.attribution a {
+    color: hsl(228, 45%, 44%);
+}
+
+/* Media Queries */
+@media (min-width: 600px) {
+    body {
+        font-size: 18px;
+    }
+
+    .container {
+        max-width: clamp(550px, 100vw, 1440px);
+        padding-block: 3em;
+    }
+
+    .header .container {
+        height: 100vh;
+        background-image: url('./images/desktop/image-header.jpg');
+        padding: 1em 1em 0;
+    }
+
+    .menu,
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+    }
+
+    .nav {
+        max-height: none;
+        max-width: fit-content;
+        position: relative;
+        margin: 0;
+        margin-left: auto;
+        background-color: transparent;
+    }
+
+    .nav .btn {
+        background-color: var(--white);
+        margin: 0;
+        transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    }
+
+    .nav .btn:hover {
+        background-color: hsla(0, 0%, 100%, 0.3);
+        color: var(--white);
+    }
+
+    .menu {
+        margin: 0;
+        gap: 2em;
+    }
+
+    .menu a {
+        padding: 0;
+        color: var(--white);
+    }
+
+    .hamb {
+        display: none;
+    }
+
+    .features .container {
+        text-align: left;
+    }
+
+    .feature-item {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .feature-text {
+        padding: 2em 3em;
+    }
+
+    .transform {
+        order: 0;
+    }
+
+    .graphic,
+    .photography {
+        background-position: 50%;
+        text-align: center;
+        align-items: center;
+        justify-content: end;
+        /* height: 340px; */
+    }
+
+    /* .graphic > .grid-desc,
+    .photography > .grid-desc {
+        width: 350px;
+    } */
+
+    .graphic {
+        background-image: url('./images/desktop/image-graphic-design.jpg');
+    }
+
+    .photography {
+        background-image: url('./images/desktop/image-photography.jpg');
+    }
+
+    .testimonials-wrapper {
+        display: flex;
+        gap: 1em;
+        padding-inline: 2em;
+    }
+
+    .gallery .container {
+        grid-template-columns: repeat(4, 1fr);
+        aspect-ratio: unset;
+    }
+
+    .milk {
+        background-image: url('./images/desktop/image-gallery-milkbottles.jpg');
+    }
+    .orange {
+        background-image: url('./images/desktop/image-gallery-orange.jpg');
+    }
+    .cone {
+        background-image: url('./images/desktop/image-gallery-cone.jpg');
+    }
+    .cubes {
+        background-image: url('./images/desktop/image-gallery-sugarcubes.jpg');
+    }
+}
+
+@media (max-width: 20em) {
+    body {
+        font-size: 15px;
+    }
+
+    .container {
+        padding-inline: 0.5em;
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* 
+    
+    
+    ## Typography
+    
+    ### Body Copy
+    
+    - Font size: 18px
+    
+    ### Font
+    
+    - Family: [Barlow](https://fonts.google.com/specimen/Barlow)
+    - Weights: 600
+    - Family: [Fraunces](https://fonts.google.com/specimen/Fraunces)
+    - Weights: 700, 900
+    
+    ## Icons
+    
+    We provide the required social icons. But, if you prefer, you can use a font icon library. Some suggestions can be found below:
+    
+    - [Font Awesome](https://fontawesome.com)
+    - [IcoMoon](https://icomoon.io)
+    - [Ionicons](https://ionicons.com)
+    
+    */
